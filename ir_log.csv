@@ -1,0 +1,5 @@
+frame_id,source,phenomenon,affected_field,effect_on_label
+D02,real_IR,"Tài xế mặc áo hiện lên sáng trong ảnh NIR; theo quan sát của người học không đeo kính và tay không chạm vô lăng",glasses; hand.on_wheel,"Gán glasses=none và hand.on_wheel=no nếu vùng đó nhìn rõ"
+D03,real_IR,"Tài xế mặc áo hiện lên sáng trong ảnh NIR và đeo kính; mắt trông buồn ngủ; dây an toàn được mô tả là đeo đúng cách; một tay chạm vô lăng",eye_state; glasses; seatbelt; hand.on_wheel; face13,"Chỉ gán eye=closed nếu mí khép rõ; ghi seatbelt=worn_correct và on_wheel=yes theo quan sát; gắn cờ cho điểm face13 bị che"
+S03_ir,IR_sim,"Ảnh không quá tối; theo quan sát, vật và ghế infant còn nhìn rõ, ánh sáng gần giống ảnh RGB cùng cảnh",object; infant_seat,"Có thể giữ nhãn vật và infant_seat nếu chúng vẫn phân biệt rõ trên IR-sim"
+S04_ir,IR_sim,"Ảnh tối; người khó nhìn rõ",person; person attributes,"Chỉ vẽ person nếu hình dáng còn nhận ra; để thuộc tính không quan sát chắc chắn ở unknown"
