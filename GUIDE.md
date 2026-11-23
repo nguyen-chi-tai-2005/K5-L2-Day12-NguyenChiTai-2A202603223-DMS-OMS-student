@@ -77,7 +77,7 @@ Guideline này do khóa học soạn. Nó **không** phải guideline của SVIR
 | `face13` | skeleton 13 điểm | 13 điểm mặt của Ngày 4, trên mặt đã có box `face` | cờ `occluded` / `outside` cho từng điểm | DMS |
 | `hand` | rectangle | Một bàn tay: đầu ngón đến cổ tay | `whose`: driver, passenger · `side`: left, right (của người) · `on_wheel`: yes, no, unknown | DMS |
 | `phone` | rectangle | Cả chiếc điện thoại, kể cả phần bị ngón tay che | `state`: held, mounted, lap | DMS |
-| `child_seat` | rectangle | Cả ghế trẻ em, ghế đang trống | `seat` · `occupied`: no, unknown (**không có `yes`**) | OMS |
+| `child_seat` | rectangle | Ghế trẻ em và tình trạng có người/vật bên trong | `seat` · `occupied`: yes, no, unknown (theo schema cập nhật của coach) | OMS |
 | `infant_seat` | rectangle | Cả ghế em bé (nôi xách), ghế đang trống | `seat` · `facing`: rear, front | OMS |
 | `object` | rectangle | Một đồ vật mang theo, hộp sát vật | `seat` · `type`: bag, box, cup, other | OMS |
 | tag `frame_meta` | tag (cả ảnh) | Mỗi ảnh đúng một lần, đặt **trước** box đầu tiên | `modality`: rgb, ir · `light`: day, night, unknown · `camera_blocked`: yes, no | OMS, DMS |
@@ -151,7 +151,7 @@ Chỉ gán những label bảng 4.1 ghi cho phần đó, không gán thêm loạ
 
 - Mỗi ghế có người hoặc vật: một box đúng label, `seat` theo xe (`rear_right` là ghế bên trái ảnh).
 - Vật nằm trong ghế trẻ em: **hai box riêng** (`child_seat` và `object`), cùng `seat`. Không gộp thành một.
-- `child_seat`: `occupied = no` khi thấy ghế trống; `unknown` khi không thấy rõ bên trong. Không dùng `yes`.
+- `child_seat`: dùng `occupied = no` khi thấy ghế trống, `yes` khi thấy rõ có người/vật bên trong, và `unknown` khi không thể kết luận. Theo schema cập nhật coach cấp cho task này.
 - Đồ vật: `type` theo hình dạng (bag, box, cup). Không chắc thì ghi `other`.
 - Người lớn bị che một phần: vẫn vẽ `person` cho phần thấy được. `seatbelt` và mắt ghi `unknown` nếu không thấy.
 - Không vẽ box cho ghế trống. Đếm số ghế trống vào ghi chú.
@@ -159,7 +159,7 @@ Chỉ gán những label bảng 4.1 ghi cho phần đó, không gán thêm loạ
 ### 4.9 Tự kiểm trước khi nộp
 
 - [ ] Mọi ảnh có đúng một tag `frame_meta`, `modality` đúng loại ảnh.
-- [ ] Mọi box OMS có `seat`. Ghế gọi theo xe, không theo ảnh. Không có `occupied = yes`. SVIRO không có `worn_*`.
+- [ ] Mọi box OMS có `seat`. Ghế gọi theo xe, không theo ảnh. `child_seat.occupied` theo schema cập nhật của coach. SVIRO không có `worn_*`.
 - [ ] Không còn giá trị đoán: chỗ không thấy là `unknown` (hoặc cờ `occluded`/`outside` ở điểm mặt).
 - [ ] Mắt và tay trái/phải theo người. `face13` đúng trái/phải, mặt dưới 60 px không có `face13`.
 - [ ] Vật trong ghế trẻ em có hai box. Ghế trống không có box.
